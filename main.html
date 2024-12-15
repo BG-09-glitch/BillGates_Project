@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <h1>Swift Canteen</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Contacts">Contacts</a></li>
+                <li><a href="About">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+<div class="menu-container">
+    <h2>Menu</h2>
+
+    <div class="menu-item">
+        <div>
+            <img src="featured-stovetop-burgers-recipe.jpg" alt="Burger" style="width: 250px; height: 250px;">
+        </div>
+        <h3>Burger</h3>
+        <p>Price: $5.00</p>
+        <p>Calories: 500 kcal</p>
+        <label for="burgerToppings">Extra Toppings:</label>
+        <select id="burgerToppings">
+            <option value="Cheese">Cheese</option>
+            <option value="Bacon">Bacon</option>
+            <option value="None">None</option>
+        </select><br>
+        <button class="add-to-cart" data-item="Burger" data-price="5">Add to Cart</button>
+    </div>
+
+    <div class="menu-item">
+        <div>
+            <img src="jollof.jpg" alt="Jollof Rice" style="width: 250px; height: 250px;">
+        </div>
+        <h3>Jollof Rice with Grilled Chicken</h3>
+        <p>Price: $5.00</p>
+        <p>Calories: 650 kcal</p>
+        <p>Contains black and green pepper</p>
+        <label for="jollofToppings">Extra Toppings:</label>
+        <select id="jollofToppings">
+            <option value="Plantain">Plantain</option>
+            <option value="Salad">Salad</option>
+            <option value="Egg">Egg</option>
+            <option value="None">None</option>
+        </select>
+        <button class="add-to-cart" data-item="Jollof Rice" data-price="5">Add to Cart</button>
+    </div>
+
+    <div class="menu-item">
+        <div>
+            <img src="rice.jpg" alt="fried rice" style="width: 250px; height: 250px;">
+        </div>
+        <h3>Fried Rice with Grilled Chicken</h3>
+        <p>Price: $5.00</p>
+        <p>Calories: 650 kcal</p>
+        <p>Contains black and green pepper</p>
+        <label for="friedToppings">Extra Toppings:</label>
+        <select id="friedToppings">
+            <option value="Plantain">Plantain</option>
+            <option value="Salad">Salad</option>
+            <option value="Egg">Egg</option>
+            <ption value="none">none</option>
+        </select>
+        <button class="add-to-cart" data-item="Fried Rice" data-price="5">Add to Cart</button>
+    </div>
+
+    <div class="menu-item">
+        <div>
+            <img src="fries.jpg" alt="French fries" style="width: 250px; height: 250px;">
+        </div>
+        <h3>French fries with Grilled Chicken</h3>
+        <p>Price: $5.00</p>
+        <p>Calories: 650 kcal</p>
+        <p>Contains black and green pepper</p>
+        <label for="friesToppings">Extra Toppings:</label>
+        <select id="friesToppings">
+            <option value="barbecue">Barbecue</option>
+            <option value="Salad">Salad</option>
+            <option value="none">none</option>
+        </select>
+        <button class="add-to-cart" data-item="french fries" data-price="5">Add to Cart</button>
+    </div>
+
+    <div class="menu-item">
+        <div>
+            <img src="fufu.jpg" alt="fufu" style="width: 250px; height: 250px;">
+        </div>
+        <h3>Fufu with goat soup</h3>
+        <p>Price: $5.00</p>
+        <p>Calories: 600 kcal</p>
+        <p>Contains black and green pepper</p>
+        <label for="fufuToppings">Extra Toppings:</label>
+        <select id="fufuToppings">
+            <option value="fish">fish</option>
+            <option value="Egg">Egg</option>
+            <option value="none">none</option>
+        </select>
+        <button class="add-to-cart" data-item="Jollof Rice" data-price="5">Add to Cart</button>
+    </div>
+
+    <div class="menu-item">
+        <div>
+            <img src="english breakfast.jpg" alt="English Breakfast" style="width: 250px; height: 250px;">
+        </div>
+        <h3>English Breakfast</h3>
+        <p>Price: $8.00</p>
+        <p>Calories: 850 kcal</p>
+        <p>Contains black and green pepper</p>
+        <label for="englishToppings">Extra Toppings:</label>
+        <select id="englishToppings">
+            <option value="toast">French Toast</option>
+            <option value="tea">Tea</option>
+            <option value="none">none</option>
+        </select>
+        <button class="add-to-cart" data-item="Jollof Rice" data-price="8">Add to Cart</button>
+    </div>
+    
+</div>
+
+<!-- Cart Display -->
+<div class="cart-container">
+    <h2>Your Cart</h2>
+    <ul id="cartItems"></ul>
+    <p>Total: $<span id="totalAmount">0.00</span></p>
+</div>
+
+<a href="cart.html">
+    <button>Go to Cart</button>
+</a>
+
+
+<footer> 
+        &copy; 2024 Swift Canteen.All Rights reserved
+      </footer>
+
+</body>
+</html>
+
+<script>
+const cart = [];
+const cartItemsContainer = document.getElementById('cartItems');
+const totalAmountContainer = document.getElementById('totalAmount');
+
+// Save cart to MongoDB
+function saveCartToMongoDB() {
+    const userId = 'user123'; // Replace with actual user ID (can be retrieved from session/cookies)
+
+    fetch('http://localhost:5000/api/saveCart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            userId: userId,
+            items: cart,
+            totalAmount: calculateTotalAmount(),
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Cart saved:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Retrieve cart from MongoDB
+function loadCartFromMongoDB() {
+    const userId = 'user123'; // Replace with actual user ID
+
+    fetch(`http://localhost:5000/api/getCart/${userId}`)
+        .then(response => response.json())
+        .then(cartData => {
+            if (cartData.items) {
+                cart.push(...cartData.items);
+                updateCartDisplay();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', function () {
+        const itemName = this.getAttribute('data-item');
+        const itemPrice = parseFloat(this.getAttribute('data-price'));
+
+        // Unique topping selection per item
+        const toppingId = this.previousElementSibling.id;
+        const extraToppings = document.getElementById(toppingId).value;
+
+        const item = { itemName, itemPrice, extraToppings };
+        cart.push(item);
+
+        // Save updated cart to MongoDB
+        saveCartToMongoDB();
+
+        updateCartDisplay();
+        alert(`${itemName} added to cart with ${extraToppings}.`);
+    });
+});
+
+// Calculate total amount
+function calculateTotalAmount() {
+    return cart.reduce((total, item) => total + item.itemPrice, 0);
+}
+
+// Update Cart Display
+function updateCartDisplay() {
+    cartItemsContainer.innerHTML = '';
+    let totalAmount = 0;
+
+    cart.forEach(item => {
+        totalAmount += item.itemPrice;
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.itemName} - $${item.itemPrice.toFixed(2)} (Topping: ${item.extraToppings})`;
+        cartItemsContainer.appendChild(listItem);
+    });
+
+    totalAmountContainer.textContent = totalAmount.toFixed(2);
+}
+
+// Load the cart from MongoDB when the page loads
+window.onload = function() {
+    loadCartFromMongoDB();
+};
+
+</script>

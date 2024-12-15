@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style5.css">
+</head>
+<body>
+  
+  <header class="main-header">
+    <div class="logo">
+        <h1>Swift Canteen</h1>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="main.html">Home</a></li>
+            <li><a href="Contacts">Contacts</a></li>
+            <li><a href="About">About</a></li>
+        </ul>
+    </nav>
+</header>
+    <!-- Order Tracking -->
+    <div class="order-tracking-container">
+        <h2>Order Tracking</h2>
+        <p>Status: <span id="orderStatus">Preparing</span></p>
+        <button id="updateStatus">Update Status</button>
+      </div>
+      
+      <div class="loyalty-container">
+        <h2>Loyalty Points</h2>
+        <p>You have <span id="loyaltyPoints">0</span> points.</p>
+        <button id="addPoints">Add Points</button>
+        <p id="discountMessage" style="color: green; font-weight: bold; display: none;">
+          Congratulations! You are eligible for a discount!
+        </p>
+      </div>
+      
+      <a href="main.html">
+        <button>Order Again</button>
+    </a>
+
+  </div>
+</body>
+</html>
+
+<script>
+
+/// Simulating order status updates
+const orderStatusElement = document.getElementById('orderStatus');
+const updateStatusButton = document.getElementById('updateStatus');
+
+// Possible statuses
+const statuses = ['Preparing', 'Ready for Pickup', 'Completed'];
+let currentStatusIndex = 0;
+
+updateStatusButton.addEventListener('click', () => {
+  // Cycle through statuses
+  currentStatusIndex = (currentStatusIndex + 1) % statuses.length;
+  const newStatus = statuses[currentStatusIndex];
+  orderStatusElement.textContent = newStatus;
+
+  // Check if the status is "Ready for Pickup"
+  if (newStatus === 'Ready for Pickup') {
+    alert('Your food is ready for pickup!');
+  }
+  alert(`Order status updated to: ${newStatus}`);
+});
+
+
+  let loyaltyPoints = 0; // Initialize points
+  const pointsDisplay = document.getElementById('loyaltyPoints');
+  const discountMessage = document.getElementById('discountMessage');
+  const addPointsButton = document.getElementById('addPoints');
+
+  // Function to update the points display and check discount eligibility
+  function updatePointsDisplay() {
+    pointsDisplay.textContent = loyaltyPoints;
+
+    // Check for discount eligibility
+    if (loyaltyPoints > 20) {
+      discountMessage.style.display = 'block';
+    } else {
+      discountMessage.style.display = 'none';
+    }
+  }
+
+  // Event listener for adding points
+  addPointsButton.addEventListener('click', function () {
+    // Add 5 points for each click (you can customize this value)
+    loyaltyPoints += 5;
+    updatePointsDisplay();
+  });
+
+  function applyDiscount() {
+    if (loyaltyPoints > 20) {
+      const discountRate = 0.1; // 10% discount
+      const discountedTotal = orderTotal * (1 - discountRate);
+      orderTotalElement.textContent = discountedTotal.toFixed(2); // Update displayed total
+      alert(`Discount applied! Your new total is $${discountedTotal.toFixed(2)}.`);
+    } else {
+      alert('You need more than 20 points to get a discount.');
+    }
+  }
+
+  // Event listener for applying discount
+  applyDiscountButton.addEventListener('click', applyDiscount);
+  
+
+    </script>

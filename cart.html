@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>total Cart</title>
+    <link rel="stylesheet" href="style4.css">
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">
+        <h1>Swift Canteen</h1>
+    </div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="main.html">Home</a></li>
+            <li><a href="Contacts">Contacts</a></li>
+            <li><a href="About">About</a></li>
+        </ul>
+    </nav>
+</header>
+    <div class="cart-container">
+        <h2>Cart</h2>
+        <ul id="cartItems"></ul>
+    <p>Total: $<span id="totalAmount">0.00</span></p>
+        <a href="orderloyalty.html">
+          <button id="placeOrder">Place Order</button>
+        </a>
+        
+      </div>
+      
+</body>
+</html>
+
+<script>
+
+const cartItemsContainer = document.getElementById('cartItems');
+const totalAmountContainer = document.getElementById('totalAmount');
+
+// Retrieve cart from MongoDB
+function loadCartFromMongoDB() {
+    const userId = 'user123'; // Replace with actual user ID
+
+    fetch(`http://localhost:5000/api/getCart/${userId}`)
+        .then(response => response.json())
+        .then(cartData => {
+            if (cartData.items) {
+                updateCartDisplay(cartData.items);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// Update Cart Display
+function updateCartDisplay(cartItems) {
+    cartItemsContainer.innerHTML = '';
+    let totalAmount = 0;
+
+    cartItems.forEach(item => {
+        totalAmount += item.itemPrice;
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.itemName} - $${item.itemPrice.toFixed(2)} (Topping: ${item.extraToppings})`;
+        cartItemsContainer.appendChild(listItem);
+    });
+
+    totalAmountContainer.textContent = totalAmount.toFixed(2);
+}
+
+// Load the cart from MongoDB when the page loads
+window.onload = function() {
+    loadCartFromMongoDB();
+};
+
+
+</script>
