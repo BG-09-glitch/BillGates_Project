@@ -7,6 +7,11 @@ Overview
 This project is a responsive Canteen Ordering System designed to enable students and staff to browse a canteen menu, customize orders, and track them in real time. It also includes user registration, profile management, and a loyalty program. This documentation explains the key features, functionality, and structure of the system.
 
 
+# Link to main repo - https://github.com/BG-09-glitch/BillGates_Project
+
+# Deployment links - https://mellow-lolly-0fcdc1.netlify.app/ 
+
+# Backend deployment link - https://billgates-project.onrender.com
 
 Features and Requirements
 1. User Registration & Profile Management 
