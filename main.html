@@ -149,7 +149,7 @@
 
 </body>
 </html>
-
+<script src="server1.js"></script>
 <script>
 const cart = [];
 const cartItemsContainer = document.getElementById('cartItems');
@@ -157,7 +157,7 @@ const totalAmountContainer = document.getElementById('totalAmount');
 
 // Save cart to MongoDB
 function saveCartToMongoDB() {
-    const userId = 'user123'; // Replace with actual user ID (can be retrieved from session/cookies)
+    const userId = 'canteen_10-12'; // Replace with actual user ID (can be retrieved from session/cookies)
 
     fetch('http://localhost:5000/api/saveCart', {
         method: 'POST',
@@ -181,7 +181,7 @@ function saveCartToMongoDB() {
 
 // Retrieve cart from MongoDB
 function loadCartFromMongoDB() {
-    const userId = 'user123'; // Replace with actual user ID
+    const userId = 'canteen_10-12'; // Replace with actual user ID
 
     fetch(`http://localhost:5000/api/getCart/${userId}`)
         .then(response => response.json())

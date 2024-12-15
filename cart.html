@@ -39,7 +39,7 @@ const totalAmountContainer = document.getElementById('totalAmount');
 
 // Retrieve cart from MongoDB
 function loadCartFromMongoDB() {
-    const userId = 'user123'; // Replace with actual user ID
+    const userId = 'canteen_10-12'; // Replace with actual user ID
 
     fetch(`http://localhost:5000/api/getCart/${userId}`)
         .then(response => response.json())
